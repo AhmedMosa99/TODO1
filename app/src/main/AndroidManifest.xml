@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TODO">
-        <activity android:name=".TaskChoices"></activity>
+        <activity android:name=".Result"></activity>
+        <activity android:name=".TaskChoices" />
         <activity android:name=".List" />
         <activity android:name=".Login" />
         <activity android:name=".Register" />
