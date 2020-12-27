@@ -94,87 +94,15 @@
             android:text="Create new task here"
             android:textSize="20dp"
             android:textColor="@color/white"
-
             />
     </LinearLayout>
-    <LinearLayout
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/choice_rv"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/editlist"
-        android:orientation="horizontal"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="25dp"
-        >
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-
-            />
-
-        <TextView
-            android:id="@+id/task1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:alpha=".9"
-            android:text="Meeting with client"
-            android:textColor="@color/black"
-            android:textSize="12dp" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/editlist"
-        android:orientation="horizontal"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="25dp"
-        >
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-
-            />
-
-        <TextView
-            android:id="@+id/task2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:alpha=".9"
-            android:text="Meeting with client"
-            android:textColor="@color/black"
-            android:textSize="12dp" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/editlist"
-        android:orientation="horizontal"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="25dp"
-        >
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-
-            />
-
-        <TextView
-            android:id="@+id/task3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:alpha=".9"
-            android:text="Meeting with client"
-            android:textColor="@color/black"
-            android:textSize="12dp" />
-    </LinearLayout>
-
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>

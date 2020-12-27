@@ -84,22 +84,22 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="25dp"
         >
-        <com.google.android.material.checkbox.MaterialCheckBox
+        <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
-
+            android:text="Meeting Joseph"
             />
 
-        <TextView
-            android:id="@+id/results"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:alpha=".9"
-            android:text="Meeting Joseph"
-            android:textColor="@color/black"
-            android:textSize="12dp" />
+<!--        <TextView-->
+<!--            android:id="@+id/results"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:alpha=".9"-->
+<!--            android:text="Meeting Joseph"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="12dp" />-->
         <TextView
             android:id="@+id/personal"
             android:layout_width="wrap_content"
@@ -136,16 +136,16 @@
             android:text="Meeting Joseph"
             android:textColor="@color/black"
             android:textSize="12dp" />
+
         <TextView
             android:id="@+id/personal1"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="PERSONAL"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
-            android:textColor="@color/white"
-            android:gravity="end"
             android:background="@drawable/editpersonal"
-            />
+            android:gravity="end"
+            android:text="PERSONAL"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
