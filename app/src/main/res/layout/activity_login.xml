@@ -45,28 +45,30 @@
             android:hint="YourPassword"
             android:inputType="textPassword"
             />
+
         <TextView
-            android:id="@+id/Forget"
+            android:id="@+id/forget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Forgot your password?"
-            android:layout_marginTop="10dp"
             android:layout_gravity="end"
-            android:textColor="@color/white"
-            android:layout_marginRight="20dp" />
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:text="Forgot your password?"
+            android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/login"
+            android:id="@+id/signuptv"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_marginTop="100dp"
-            android:textColor="@color/white"
             android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="100dp"
             android:backgroundTint="@color/CreateButton"
-            android:textFontWeight="700"
             android:text="Log in"
+            android:textColor="@color/white"
+            android:textFontWeight="700"
             app:layout_constraintVertical_bias="0.2" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -82,7 +84,7 @@
             android:textColor="@color/white"
             />
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/CreateProfile"
             android:layout_marginBottom="10dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
