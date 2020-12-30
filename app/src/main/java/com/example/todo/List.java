@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,8 +27,8 @@ public class List extends AppCompatActivity implements TaskAdapterEx.ListItemCli
     TaskAdapterEx  taskAdapter;
     private FirebaseAuth mAuth;
     EditText Ltitle;
+    TextView lougout;
     Button AddTask;
-    String categoryId, categoryTitle;
     Integer categoryCount = 0;
     static java.util.List<Task> categoriesTask = new ArrayList<>();
 
@@ -38,8 +39,7 @@ public class List extends AppCompatActivity implements TaskAdapterEx.ListItemCli
        tasks_rv=findViewById(R.id.tasks_rv);
        Ltitle=findViewById(R.id.Ltitle);
        AddTask=findViewById(R.id.AddTask);
-
-
+     lougout=findViewById(R.id.layout);
         AddTask.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -75,10 +75,6 @@ public class List extends AppCompatActivity implements TaskAdapterEx.ListItemCli
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
                 });
-        tasks_rv = findViewById(R.id.tasks_rv);
-        tasks_rv.setLayoutManager(new LinearLayoutManager(this));
-        taskAdapter = new TaskAdapterEx(categoriesTask,  this);
-        tasks_rv.setAdapter(taskAdapter);
         findViewById(R.id.logout).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -89,6 +85,19 @@ public class List extends AppCompatActivity implements TaskAdapterEx.ListItemCli
 
             }
         });
+ findViewById(R.id.back).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(List.this,MainActivity.class);
+                startActivity(intent);
+
+            }
+        });
+        tasks_rv = findViewById(R.id.tasks_rv);
+        tasks_rv.setLayoutManager(new LinearLayoutManager(this));
+        taskAdapter = new TaskAdapterEx(categoriesTask,  this);
+        tasks_rv.setAdapter(taskAdapter);
+
     }
 
     @Override

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +33,8 @@ public class TaskChoices extends AppCompatActivity implements CheckTaskAdapter.L
     TextView cateTitle,delete;
     private FirebaseAuth mAuth;
     static List<CheckTask> CheckList = new ArrayList<>();
+    int count;
+    boolean flag =true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +65,40 @@ public class TaskChoices extends AppCompatActivity implements CheckTaskAdapter.L
                 Toast.makeText(TaskChoices.this,"added successfully", Toast.LENGTH_SHORT).show();
                 TaskTitle.setText("");
                 TaskDescription.setText("");
+                FirebaseDatabase.getInstance().getReference("Users").child(uid).child("task")
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                // This method is called once with the initial value and again
+                                // whenever data at this location is updated.
+                                for(DataSnapshot snapshot: dataSnapshot.getChildren() ){
+                                    Task task =  snapshot.getValue(Task.class);
+                                    if(task.getId().compareTo(categoryId) == 0 && flag){
+                                        count = task.getCount() + 1;
+                                        FirebaseDatabase.getInstance().getReference("Users").child(uid).child("task").child(categoryId).child("count").setValue(count);
+                                        flag = false;
+                                        break;
+                                    }
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError error) {
+                                // Failed to read value
+                            }
+                        });
             }
         });
+        findViewById(R.id.back1).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                finish();
+
+            }
+        });
+
 
         delete.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -95,9 +130,8 @@ public class TaskChoices extends AppCompatActivity implements CheckTaskAdapter.L
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
                 });
-//        CheckList.add(new CheckTask("1","Meeting with client" ,false,"ahmed"));
-//        CheckList.add(new CheckTask("2","Meeting with AHmed" ,true,"ahmed"));
-//        CheckList.add(new CheckTask("3","Meeting with Omer" ,false,"ahmed"));
+
+
         choice_rv = findViewById(R.id.choice_rv);
         choice_rv.setLayoutManager(new LinearLayoutManager(this));
         taskAdapter = new CheckTaskAdapter (this,CheckList,  this);
@@ -108,6 +142,12 @@ public class TaskChoices extends AppCompatActivity implements CheckTaskAdapter.L
 
     @Override
     public void onListItemClick(int position) {
-
+        Intent intent = new Intent(TaskChoices.this, information.class);
+        intent.putExtra("Task_Id", CheckList.get(position).getId());
+        intent.putExtra("Task_Title", CheckList.get(position).getTitle());
+        intent.putExtra("Task_Description", CheckList.get(position).getDescription());
+        intent.putExtra("Category_Title", categoryTitle);
+        intent.putExtra("Category_Id", categoryId);
+        startActivity(intent);
     }
 }

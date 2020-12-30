@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
     TextView BtnNext;
@@ -19,13 +20,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BtnNext=findViewById(R.id.BtnNext);
-        BtnNext.setOnClickListener(new View.OnClickListener() {
+        BtnNext.setOnClickListener(new View.OnClickListener(){
+
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,Login.class);
-                startActivity(intent);
+                Intent intent;
+                if(null != FirebaseAuth.getInstance().getCurrentUser()){
+                    intent = new Intent(MainActivity.this, List.class);
 
+                }else {
+                    intent = new Intent(MainActivity.this, Login.class);
+                }
+                startActivity(intent);
             }
         });
+
     }
 }

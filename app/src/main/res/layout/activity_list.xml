@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:src="@drawable/arrow_foreground"
@@ -39,39 +40,6 @@
             android:textFontWeight="700"
             android:textSize="18sp" />
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp"
-     android:background="@drawable/edit_rounded"
-        android:textColor="#FFFFFF">
-        <ImageView
-            android:id="@+id/SearchImage"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:src="@drawable/search_foreground" />
-
-        <TextView
-            android:id="@+id/Search"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginHorizontal="20dp"
-            android:hint="Search"
-            android:layout_marginTop="15dp"
-            android:textColorHint="@color/white"
-            android:textSize="20dp"
-            android:alpha="0.9"
-            />
-    </LinearLayout>
-
-    <View
-        android:id="@+id/back2"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginLeft="40dp"
-
-        />
 
     <TextView
         android:layout_width="match_parent"
@@ -89,7 +57,7 @@
         android:layout_height="40dp"
         android:layout_marginHorizontal="20dp"
         android:background="@drawable/editlist"
-        android:text="Add List"
+        android:hint="Add List"
         android:padding="10dp"
         android:layout_marginTop="10dp"
         android:alpha="0.9"

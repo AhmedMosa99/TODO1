@@ -37,8 +37,6 @@ public class CheckTaskAdapter extends RecyclerView.Adapter<CheckTaskAdapter.View
         }
 
         public void setData(final CheckTask task) {
-           // title.setText(task.getTitle());
-           // isChecked.setText(task.getIsChecked());
             checkBox.setText(task.getTitle());
             checkBox.setSelected(task.getIsChecked());
         }

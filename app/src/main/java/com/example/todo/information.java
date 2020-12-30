@@ -1,14 +1,76 @@
 package com.example.todo;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class information extends AppCompatActivity {
-
+    TextView taskName,taskDescription,categoryList,deleteTask;
+    String taskId,taskTitle,taskDes,categoryId,categoryName;
+    FirebaseAuth mAuth;
+    boolean flag=true;
+    int count;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
+        Bundle extras = getIntent().getExtras();
+        taskId = extras.getString("Task_Id");
+        taskTitle=extras.getString("Task_Title");
+        taskDes=extras.getString("Task_Description");
+        categoryName=extras.getString("Category_Title");
+        categoryId=extras.getString("Category_Id");
+        taskName=findViewById(R.id.taskName);
+        taskDescription=findViewById(R.id.taskDescription);
+        categoryList=findViewById(R.id.categoryList);
+        deleteTask=findViewById(R.id.deleteTask);
+        taskName.setText(taskTitle);
+        taskDescription.setText(taskDes);
+        categoryList.setText(categoryName);
+        deleteTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(android.view.View v) {
+                mAuth = FirebaseAuth.getInstance();
+                FirebaseUser user = mAuth.getCurrentUser();
+                String uid = user.getUid();
+                FirebaseDatabase.getInstance().getReference("Users").child(uid).child("task").child(categoryId).child("innerTask").child(taskId).removeValue();
+                FirebaseDatabase.getInstance().getReference("Users").child(uid).child("task")
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                // This method is called once with the initial value and again
+                                // whenever data at this location is updated.
+                                for(DataSnapshot snapshot: dataSnapshot.getChildren() ){
+                                    Task task =  snapshot.getValue(Task.class);
+                                    if(task.getId().compareTo(categoryId) == 0 && flag){
+                                        count = task.getCount() -1;
+                                        FirebaseDatabase.getInstance().getReference("Users").child(uid).child("task").child(categoryId).child("count").setValue(count);
+                                        flag = false;
+                                        break;
+                                    }
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError error) {
+                                // Failed to read value
+                            }
+                        });
+                finish();
+            }
+        });
+
     }
 }
