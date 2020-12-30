@@ -29,7 +29,7 @@ public class TaskChoices extends AppCompatActivity implements CheckTaskAdapter.L
   ImageView addTask;
     EditText TaskDescription, TaskTitle;
     String categoryId,categoryTitle;
-    TextView cateTitle;
+    TextView cateTitle,delete;
     private FirebaseAuth mAuth;
     static List<CheckTask> CheckList = new ArrayList<>();
 
@@ -42,6 +42,7 @@ public class TaskChoices extends AppCompatActivity implements CheckTaskAdapter.L
         categoryTitle=extras.getString("CATEGORY_TITLE");
         cateTitle=findViewById(R.id.cateTitle);
         cateTitle.setText(categoryTitle);
+        delete=findViewById(R.id.delete);
         addTask=findViewById(R.id.addTask);
         TaskDescription = findViewById(R.id.TaskDescription);
         TaskTitle = findViewById(R.id.TaskTitle);
@@ -61,6 +62,18 @@ public class TaskChoices extends AppCompatActivity implements CheckTaskAdapter.L
                 Toast.makeText(TaskChoices.this,"added successfully", Toast.LENGTH_SHORT).show();
                 TaskTitle.setText("");
                 TaskDescription.setText("");
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                mAuth = FirebaseAuth.getInstance();
+                FirebaseUser user = mAuth.getCurrentUser();
+                String uid = user.getUid();
+                FirebaseDatabase.getInstance().getReference("Users").child(uid).child("task").child(categoryId).removeValue();
+                finish();
+           System.out.println(uid);
             }
         });
         mAuth= FirebaseAuth.getInstance();
