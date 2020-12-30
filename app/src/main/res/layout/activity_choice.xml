@@ -4,7 +4,7 @@
     android:background="@drawable/editlist"
     android:orientation="horizontal"
     android:layout_marginHorizontal="20dp"
-    android:layout_marginTop="25dp"
+    android:layout_marginTop="15dp"
     >
     <CheckBox
         android:id="@+id/Checkbox"

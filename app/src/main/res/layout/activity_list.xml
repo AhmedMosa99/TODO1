@@ -27,16 +27,17 @@
             android:textColor="#FFFFFF "
             android:textSize="22dp"
             />
+
         <TextView
+            android:id="@+id/logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:layout_marginLeft="70dp"
+           android:layout_gravity="center"
+            android:text="Logout"
             android:textColor="@color/white"
             android:textFontWeight="700"
-            android:gravity="end"
-            android:layout_marginLeft="70dp"
-            android:text="Logout"
-            />
+            android:textSize="18sp" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -82,7 +83,26 @@
         android:layout_marginLeft="33dp"
 
         />
+    <EditText
+        android:id="@+id/Ltitle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/editlist"
+        android:text="Add List"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:alpha="0.9"
 
+        />
+    <Button
+        android:id="@+id/AddTask"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="add Task"
+        android:background="@color/CreateButton"/>
 
 
     <androidx.recyclerview.widget.RecyclerView

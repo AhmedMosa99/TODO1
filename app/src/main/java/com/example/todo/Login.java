@@ -32,7 +32,7 @@ public class Login extends AppCompatActivity {
         forget = findViewById(R.id.forget);
         username = findViewById(R.id.username);
         password= findViewById(R.id.password);
-        loginbtn = findViewById(R.id.signuptv);
+        loginbtn = findViewById(R.id.signin);
         CreateProfile=findViewById(R.id.CreateProfile);
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override

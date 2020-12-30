@@ -16,18 +16,22 @@ public class CheckTaskAdapter extends RecyclerView.Adapter<CheckTaskAdapter.View
 
     private final Context context;
     List<CheckTask> tasks;
+    ListItemClickListener mListItemClickListener;
 
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CheckBox checkBox;
-
-        public ViewHolder(View view) {
+        ListItemClickListener listItemClickListener;
+        public ViewHolder(View view,ListItemClickListener listItemClickListener) {
             super(view);
             // Define click listener for the ViewHolder's View
             checkBox = itemView.findViewById(R.id.Checkbox);
+            this.listItemClickListener = listItemClickListener;
+            itemView.setOnClickListener(this);
+            view.setOnClickListener(this);
 
 
         }
@@ -38,11 +42,17 @@ public class CheckTaskAdapter extends RecyclerView.Adapter<CheckTaskAdapter.View
             checkBox.setText(task.getTitle());
             checkBox.setSelected(task.getIsChecked());
         }
+
+        @Override
+        public void onClick(View v) {
+            listItemClickListener.onListItemClick(getAdapterPosition());
+        }
     }
 
-    public CheckTaskAdapter(Context context, List<CheckTask> tasks) {
+    public CheckTaskAdapter(Context context, List<CheckTask> tasks, ListItemClickListener listItemClickListener) {
         this.context = context;
         this.tasks = tasks;
+        this.mListItemClickListener=listItemClickListener;
     }
     // Create new views (invoked by the layout manager)
     @Override
@@ -51,7 +61,7 @@ public class CheckTaskAdapter extends RecyclerView.Adapter<CheckTaskAdapter.View
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.activity_choice, viewGroup, false);
 
-        return new ViewHolder(view);
+        return new ViewHolder(view,mListItemClickListener);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -78,6 +88,9 @@ public class CheckTaskAdapter extends RecyclerView.Adapter<CheckTaskAdapter.View
 
             }
         });
+    }
+    interface ListItemClickListener {
+        void onListItemClick(int position);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

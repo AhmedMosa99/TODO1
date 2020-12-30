@@ -4,15 +4,18 @@ package com.example.todo;
 public class CheckTask {
     String Title;
     Boolean isChecked;
-    String id;
+    String id,Description;
 
-    public void CheckTask() {
+    public CheckTask() {
+
     }
 
-    public CheckTask(String id,String title, Boolean isChecked) {
+
+    public CheckTask(String id,String title, Boolean isChecked,String Description ) {
         this.Title = title;
         this.isChecked = isChecked;
         this.id=id;
+        this.Description=Description;
     }
 
     public String getId() {
@@ -38,4 +41,9 @@ public class CheckTask {
     public void setIsChecked(Boolean isChecked) {
         this.isChecked = isChecked;
     }
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String Description) { this.Description = Description;}
 }

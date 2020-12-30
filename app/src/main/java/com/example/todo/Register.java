@@ -32,7 +32,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Register extends AppCompatActivity {
-    ImageView closebtn;
     TextView signtv;
     EditText yourName, Password, email;
     Button signupBtn;
@@ -72,13 +71,32 @@ public class Register extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
-                    public void onComplete(@NonNull final Task<AuthResult> task) {
+                    public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(Register.this, TaskChoices.class);
-                            startActivity(intent);
-                            Toast.makeText(Register.this, "Done successfully", Toast.LENGTH_SHORT).show();
-                        }else {
-                            // If sign in fails, display a message to the user.
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            String uid = user.getUid();
+                            System.out.print(uid);
+                            Map<String,Object> data = new HashMap<>();
+                            data.put("uid",uid);
+                            FirebaseDatabase.getInstance().getReference("Users").child(uid).setValue(data)
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(Register.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                            Log.d("error",e.getLocalizedMessage());
+                                        }
+                                    })
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(Register.this, "Signup successfully.",
+                                                    Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(Register.this, Login.class);
+                                            startActivity(intent);
+                                        }
+                                    });
+
+                        } else {
                             Toast.makeText(Register.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
