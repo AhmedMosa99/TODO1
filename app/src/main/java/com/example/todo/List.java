@@ -29,7 +29,6 @@ public class List extends AppCompatActivity implements TaskAdapterEx.ListItemCli
     EditText Ltitle;
     TextView lougout;
     Button AddTask;
-    Integer categoryCount = 0;
     static java.util.List<Task> categoriesTask = new ArrayList<>();
 
     @Override
@@ -48,7 +47,7 @@ public class List extends AppCompatActivity implements TaskAdapterEx.ListItemCli
                 String uid = user.getUid();
                 Task newTask=new Task();
                 newTask.setTitle(Ltitle.getText().toString());
-                newTask.setCount(0);
+                newTask.setCount(newTask.getCount());
                 String categoryId = FirebaseDatabase.getInstance().getReference("Users").child(uid).child("task").push().getKey();
                 newTask.setId(categoryId);
                 FirebaseDatabase.getInstance().getReference("Users").child(uid).child("task").child(categoryId).setValue(newTask);

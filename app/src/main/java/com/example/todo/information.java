@@ -15,11 +15,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class information extends AppCompatActivity {
-    TextView taskName,taskDescription,categoryList,deleteTask;
+    TextView taskName,taskDescription,categoryList,deleteTask,edit;
     String taskId,taskTitle,taskDes,categoryId,categoryName;
     FirebaseAuth mAuth;
     boolean flag=true;
-    int count;
+    int count=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,14 +48,13 @@ public class information extends AppCompatActivity {
                         .addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                // This method is called once with the initial value and again
-                                // whenever data at this location is updated.
                                 for(DataSnapshot snapshot: dataSnapshot.getChildren() ){
                                     Task task =  snapshot.getValue(Task.class);
                                     if(task.getId().compareTo(categoryId) == 0 && flag){
                                         count = task.getCount() -1;
                                         FirebaseDatabase.getInstance().getReference("Users").child(uid).child("task").child(categoryId).child("count").setValue(count);
                                         flag = false;
+
                                         break;
                                     }
 
@@ -69,6 +68,25 @@ public class information extends AppCompatActivity {
                             }
                         });
                 finish();
+                findViewById(R.id.back).setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+              finish();
+
+                    }
+                });
+            }
+        });
+        findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(android.view.View v) {
+                Intent intent = new Intent(information.this, editTask.class);
+                intent.putExtra("Task_Id", taskId);
+                intent.putExtra("Task_Title", taskTitle);
+                intent.putExtra("Task_Description", taskDes);
+                intent.putExtra("CATEGORY_Name", categoryName);
+                intent.putExtra("CATEGORY_ID", categoryId);
+                startActivity(intent);
             }
         });
 

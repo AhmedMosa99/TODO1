@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TODO">
-        <activity android:name=".choice"></activity>
+        <activity android:name=".editTask"></activity>
+        <activity android:name=".choice" />
         <activity android:name=".taskitem" />
         <activity android:name=".information" />
         <activity android:name=".Result" />

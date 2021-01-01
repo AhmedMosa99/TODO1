@@ -21,7 +21,6 @@
             android:textSize="24sp"
             tools:ignore="MissingConstraints" />
         <EditText
-
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -75,16 +74,15 @@
             android:layout_weight="1"
             />
         <TextView
+            android:id="@+id/CreateProfile"
             android:layout_marginBottom="10dp"
             android:layout_gravity="center"
-            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Create your profile"
             android:textColor="@color/white"
             />
         <TextView
-            android:id="@+id/CreateProfile"
             android:layout_marginBottom="10dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"

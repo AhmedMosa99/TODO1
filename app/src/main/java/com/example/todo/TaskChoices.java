@@ -62,21 +62,18 @@ public class TaskChoices extends AppCompatActivity implements CheckTaskAdapter.L
                 String taskId = FirebaseDatabase.getInstance().getReference("Users").child(uid).child("task").child(categoryId).child("innerTask").push().getKey();
                 newTask.setId(taskId);
                 FirebaseDatabase.getInstance().getReference("Users").child(uid).child("task").child(categoryId).child("innerTask").child(taskId).setValue(newTask);
-                Toast.makeText(TaskChoices.this,"added successfully", Toast.LENGTH_SHORT).show();
-                TaskTitle.setText("");
-                TaskDescription.setText("");
                 FirebaseDatabase.getInstance().getReference("Users").child(uid).child("task")
                         .addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                // This method is called once with the initial value and again
-                                // whenever data at this location is updated.
                                 for(DataSnapshot snapshot: dataSnapshot.getChildren() ){
                                     Task task =  snapshot.getValue(Task.class);
                                     if(task.getId().compareTo(categoryId) == 0 && flag){
-                                        count = task.getCount() + 1;
-                                        FirebaseDatabase.getInstance().getReference("Users").child(uid).child("task").child(categoryId).child("count").setValue(count);
+                                        count = task.getCount() ;
+                                        FirebaseDatabase.getInstance().getReference("Users").child(uid).child("task").child(categoryId).child("count").setValue(++count);
                                         flag = false;
+//                                        Intent intent = new Intent(TaskChoices.this, com.example.todo.List.class);
+//                                        startActivity(intent);
                                         break;
                                     }
 
@@ -89,6 +86,11 @@ public class TaskChoices extends AppCompatActivity implements CheckTaskAdapter.L
                                 // Failed to read value
                             }
                         });
+                flag=true;
+                Toast.makeText(TaskChoices.this,"added successfully", Toast.LENGTH_SHORT).show();
+                TaskTitle.setText("");
+                TaskDescription.setText("");
+
             }
         });
         findViewById(R.id.back1).setOnClickListener(new View.OnClickListener(){
@@ -108,7 +110,6 @@ public class TaskChoices extends AppCompatActivity implements CheckTaskAdapter.L
                 String uid = user.getUid();
                 FirebaseDatabase.getInstance().getReference("Users").child(uid).child("task").child(categoryId).removeValue();
                 finish();
-           System.out.println(uid);
             }
         });
         mAuth= FirebaseAuth.getInstance();
